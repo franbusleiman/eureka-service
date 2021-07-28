@@ -1,0 +1,83 @@
+  version: '3.7'
+  services:
+    eureka-service:
+      image: eureka-service
+      ports:
+        - "8761:8761"
+      networks:
+        - springcloud
+      restart: always
+    oauth-service:
+      image: oauth-service
+      ports:
+        - "9100:9100"
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - eureka-service
+        - users-service
+        - zipkin
+    products-service:
+      image: products-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - eureka-service
+        - mysql
+        - zipkin
+    items-service:
+      image: items-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - eureka-service
+        - products-service
+        - zipkin
+    zul-service:
+      image: zul-service
+      networks:
+        - springcloud
+      restart: always
+      ports:
+        - "1238:1238"
+      depends_on:
+        - eureka-service
+        - users-service
+        - products-service
+        - items-service
+        - oauth-service
+        - zipkin
+    users-service:
+      image: users-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - eureka-service
+        - mysql
+        - zipkin
+    mysql:
+      image: mysql
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: sasa
+        MYSQL_DATABASE: springboot_cloud
+      networks:
+        - springcloud
+      restart: always
+    zipkin:
+      image: openzipkin/zipkin
+      ports:
+        - "9411:9411"
+      networks:
+        - springcloud
+      restart: always
+  networks:
+    springcloud:
+      name: springcloud
+
+
