@@ -18,26 +18,17 @@
         - eureka-service
         - users-service
         - zipkin
-    products-service:
-      image: products-service
+    pets-service:
+      image: pets-service
       networks:
         - springcloud
       restart: always
       depends_on:
         - eureka-service
-        - mysql
-        - zipkin
-    items-service:
-      image: items-service
-      networks:
-        - springcloud
-      restart: always
-      depends_on:
-        - eureka-service
-        - products-service
+        - users-service
         - zipkin
     zul-service:
-      image: zul-service
+      image: zuul-service
       networks:
         - springcloud
       restart: always
@@ -46,8 +37,7 @@
       depends_on:
         - eureka-service
         - users-service
-        - products-service
-        - items-service
+        - pets-service
         - oauth-service
         - zipkin
     users-service:
