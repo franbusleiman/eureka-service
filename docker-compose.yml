@@ -1,21 +1,21 @@
   version: '3.7'
   services:
     config-server:
-      image: franbusleiman/config-server
+      image: config-server
       ports:
         - "8888:8888"
       networks:
         - springcloud
       restart: always
     eureka-service:
-      image: franbusleiman/eureka-service
+      image: eureka-service
       ports:
         - "8761:8761"
       networks:
         - springcloud
       restart: always
     oauth-service:
-      image: franbusleiman/oauth-service
+      image: oauth-service
       ports:
         - "9100:9100"
       networks:
@@ -24,9 +24,23 @@
       depends_on:
         - eureka-service
         - users-service
+        - animals-service
         - zipkin
-    pets-service:
-      image: franbusleiman/pets-service
+    gateway-service:
+      image: gateway-service
+      networks:
+        - springcloud
+      restart: always
+      ports:
+        - "8085:1238"
+      depends_on:
+        - eureka-service
+        - users-service
+        - animals-service
+        - oauth-service
+        - zipkin
+    users-service:
+      image: users-service
       networks:
         - springcloud
       restart: always
@@ -34,25 +48,9 @@
         - config-server
         - eureka-service
         - mysql
-        - users-service
         - zipkin
-     # env_file:
-     #   - ../../chiflale/.env
-    gateway-service:
-      image: franbusleiman/gateway-service
-      networks:
-        - springcloud
-      restart: always
-      ports:
-        - "1238:1238"
-      depends_on:
-        - eureka-service
-        - users-service
-        - pets-service
-        - oauth-service
-        - zipkin
-    users-service:
-      image: franbusleiman/users-service
+    animals-service:
+      image: animals-service
       networks:
         - springcloud
       restart: always
