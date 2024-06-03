@@ -68,7 +68,7 @@ services:
       - springcloud
     restart: always
   mysql:
-    image: mysql:5.7
+    image: mysql
     ports:
       - "9099:3306"
     environment:
