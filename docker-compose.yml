@@ -70,7 +70,7 @@
         - springcloud
       restart: always
       volumes:
-        - vmysql:/var/lib/mysql
+        - volume_liro:/var/lib/mysql
     zipkin:
       image: openzipkin/zipkin
       ports:
@@ -82,7 +82,7 @@
     springcloud:
       name: springcloud
   volumes:
-    vmysql:
-      name: vmysql
+    volume_liro:
+      name: volume_liro
 
 
