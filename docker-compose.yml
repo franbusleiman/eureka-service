@@ -47,7 +47,6 @@ services:
     depends_on:
       - config-server
       - eureka-service
-      - mysql
       - zipkin
   animals-service:
     image: animals-service
@@ -57,7 +56,6 @@ services:
     depends_on:
       - config-server
       - eureka-service
-      - mysql
       - zipkin
 
   zipkin:
@@ -67,19 +65,6 @@ services:
     networks:
       - springcloud
     restart: always
-  mysql:
-    image: mysql
-    ports:
-      - "9099:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: sasa
-      MYSQL_DATABASE: springboot_cloud
-    networks:
-      - springcloud
-    restart: always
-    volumes:
-      - ./data/db:/var/lib/mysql
-
 networks:
   springcloud:
     name: springcloud
