@@ -62,7 +62,7 @@
     mysql:
       image: mysql
       ports:
-        - "9099:3306"
+        - "3306:3306"
       environment:
         MYSQL_ROOT_PASSWORD: sasa
         MYSQL_DATABASE: springboot_cloud
