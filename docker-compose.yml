@@ -25,6 +25,7 @@
         - eureka-service
         - users-service
         - animals-service
+        - medicines-service
         - zipkin
     gateway-service:
       image: gateway-service
@@ -37,6 +38,7 @@
         - eureka-service
         - users-service
         - animals-service
+        - medicines-service
         - oauth-service
         - zipkin
     users-service:
@@ -51,6 +53,16 @@
         - zipkin
     animals-service:
       image: animals-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - config-server
+        - eureka-service
+        - mysql
+        - zipkin
+    medicines-service:
+      image: medicines-service
       networks:
         - springcloud
       restart: always
