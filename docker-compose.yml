@@ -26,7 +26,7 @@
         - users-service
         - animals-service
         - medicines-service
-        - consulations-service
+        - consultations-service
         - zipkin
     gateway-service:
       image: gateway-service
@@ -40,7 +40,7 @@
         - users-service
         - animals-service
         - medicines-service
-        - consulations-service
+        - consultations-service
         - oauth-service
         - zipkin
     users-service:
