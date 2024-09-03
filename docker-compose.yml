@@ -55,6 +55,16 @@
         - eureka-service
         - mysql
         - zipkin
+    migrator-service:
+      image: migrator-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - config-server
+        - eureka-service
+        - mysql
+        - zipkin
     animals-service:
       image: animals-service
       networks:
