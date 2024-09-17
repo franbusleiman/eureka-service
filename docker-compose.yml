@@ -63,6 +63,8 @@
         - eureka-service
         - mysql
         - zipkin
+      volumes:
+        - /liro/vetter:/liro/vetter
     animals-service:
       image: animals-service
       networks:
