@@ -64,7 +64,7 @@
         - mysql
         - zipkin
       volumes:
-        - /liro/vetter:/liro/vetter
+        - /home/ubuntu/liro/vetter:/liro/vetter
     animals-service:
       image: animals-service
       networks:
