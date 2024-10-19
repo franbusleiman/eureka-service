@@ -85,6 +85,16 @@
         - eureka-service
         - mysql
         - zipkin
+    clinics-service:
+      image: clinics-service
+      networks:
+        - springcloud
+      restart: always
+      depends_on:
+        - config-server
+        - eureka-service
+        - mysql
+        - zipkin
     consultations-service:
       image: consultations-service
       networks:
