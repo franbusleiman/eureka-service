@@ -65,6 +65,7 @@
         - zipkin
       volumes:
         - /home/ubuntu/liro/vetter:/liro/vetter
+        - /home/ubuntu/liro/cpvet:/liro/cpvet
     animals-service:
       image: animals-service
       networks:
