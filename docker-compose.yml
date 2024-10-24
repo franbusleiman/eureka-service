@@ -77,7 +77,6 @@
       depends_on:
         - eureka-service
         - mysql
-        - zipkin
     consultations-service:
       image: consultations-service
       networks:
