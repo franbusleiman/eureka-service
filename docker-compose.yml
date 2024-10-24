@@ -20,7 +20,6 @@
         - animals-service
         - medicines-service
         - consultations-service
-        - zipkin
     gateway-service:
       image: gateway-service
       networks:
@@ -35,27 +34,22 @@
         - medicines-service
         - consultations-service
         - oauth-service
-        - zipkin
     users-service:
       image: users-service
       networks:
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
-        - zipkin
     migrator-service:
       image: migrator-service
       networks:
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
-        - zipkin
       volumes:
         - /home/ubuntu/liro/vetter:/liro/vetter
         - /home/ubuntu/liro/cpvet:/liro/cpvet
@@ -65,27 +59,22 @@
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
-        - zipkin
     medicines-service:
       image: medicines-service
       networks:
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
-        - zipkin
     clinics-service:
       image: clinics-service
       networks:
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
         - zipkin
@@ -95,7 +84,6 @@
         - springcloud
       restart: always
       depends_on:
-        - config-server
         - eureka-service
         - mysql
         - zipkin
