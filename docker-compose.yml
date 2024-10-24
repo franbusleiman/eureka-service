@@ -86,7 +86,6 @@
       depends_on:
         - eureka-service
         - mysql
-        - zipkin
     mysql:
       image: mysql
       ports:
