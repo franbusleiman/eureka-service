@@ -41,7 +41,6 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
     migrator-service:
       image: migrator-service
       networks:
@@ -49,7 +48,6 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
       volumes:
         - /home/ubuntu/liro/vetter:/liro/vetter
         - /home/ubuntu/liro/cpvet:/liro/cpvet
@@ -60,7 +58,6 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
     medicines-service:
       image: medicines-service
       networks:
@@ -68,7 +65,6 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
     clinics-service:
       image: clinics-service
       networks:
@@ -76,7 +72,6 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
     consultations-service:
       image: consultations-service
       networks:
@@ -84,24 +79,8 @@
       restart: always
       depends_on:
         - eureka-service
-        - mysql
-    mysql:
-      image: mysql
-      ports:
-        - "3306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: sasa
-        MYSQL_DATABASE: springboot_cloud
-      networks:
-        - springcloud
-      restart: always
-      volumes:
-        - volume_liro:/var/lib/mysql
   networks:
     springcloud:
       name: springcloud
-  volumes:
-    volume_liro:
-      name: volume_liro
 
 
