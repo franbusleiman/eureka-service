@@ -41,16 +41,16 @@
       restart: always
       depends_on:
         - eureka-service
-    migrator-service:
-      image: migrator-service
-      networks:
-        - springcloud
-      restart: always
-      depends_on:
-        - eureka-service
-      volumes:
-#        - /home/ubuntu/liro/vetter:/liro/vetter
-        - /home/ubuntu/liro/cpvet:/liro/cpvet
+  #  migrator-service:
+      #     image: migrator-service
+        #    networks:
+      #       - springcloud
+      #     restart: always
+        #      depends_on:
+      #        - eureka-service
+        #      volumes:
+#     - /home/ubuntu/liro/vetter:/liro/vetter
+    #        - /home/ubuntu/liro/cpvet:/liro/cpvet
     animals-service:
       image: animals-service
       networks:
