@@ -1,0 +1,130 @@
+version: '3.7'
+services:
+  eureka-service:
+    image: eureka-service
+    ports:
+      - "8761:8761"
+    networks:
+      - springcloud
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+  oauth-service:
+    image: oauth-service
+    ports:
+      - "9100:9100"
+    networks:
+      - springcloud
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+    depends_on:
+      - eureka-service
+      - users-service
+      - animals-service
+      - medicines-service
+      - consultations-service
+
+  gateway-service:
+    image: gateway-service
+    networks:
+      - springcloud
+    restart: always
+    ports:
+      - "8085:1238"
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+    depends_on:
+      - eureka-service
+      - users-service
+      - animals-service
+      - medicines-service
+      - consultations-service
+      - oauth-service
+
+  users-service:
+    image: users-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - springcloud
+    restart: always
+    depends_on:
+      - eureka-service
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+
+      #  migrator-service:
+      #     image: migrator-service
+      #    networks:
+      #       - springcloud
+      #     restart: always
+      #      depends_on:
+      #        - eureka-service
+      #      volumes:
+  #     - /home/ubuntu/liro/vetter:/liro/vetter
+  #        - /home/ubuntu/liro/cpvet:/liro/cpvet
+  animals-service:
+    image: animals-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - springcloud
+    restart: always
+    depends_on:
+      - eureka-service
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+
+  medicines-service:
+    image: medicines-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - springcloud
+    restart: always
+    depends_on:
+      - eureka-service
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+  clinics-service:
+    image: clinics-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - springcloud
+    restart: always
+    depends_on:
+      - eureka-service
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+  consultations-service:
+    image: consultations-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    networks:
+      - springcloud
+    restart: always
+    depends_on:
+      - eureka-service
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
+networks:
+  springcloud:
+    name: springcloud
